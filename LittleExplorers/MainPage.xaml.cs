@@ -1,6 +1,4 @@
-﻿using Android.Graphics;
-using Android.Icu.Number;
-using OpenCvSharp;
+﻿using OpenCvSharp;
 using SkiaSharp;
 
 namespace LittleExplorers {

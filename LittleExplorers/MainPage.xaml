@@ -4,15 +4,16 @@
              x:Class="LittleExplorers.MainPage"
              BackgroundColor="#FFFDE7"
              Shell.NavBarIsVisible="False">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!-- Τίτλος -->
-        <Label Text="Μικροί Εξερευνητές!"
+            <!-- Τίτλος -->
+            <Label Text="Μικροί Εξερευνητές!"
            FontSize="36"
            FontAttributes="Bold"
            TextColor="#FF5722"
@@ -21,8 +22,8 @@
            Margin="0,30,0,0"
            Grid.Row="0" />
 
-        <!-- Προβολή πρόκλησης -->
-        <Frame x:Name="ChallengeFrame"
+            <!-- Προβολή πρόκλησης -->
+            <Frame x:Name="ChallengeFrame"
        IsVisible="False"
        Grid.Row="1"
        BackgroundColor="#FFEB3B"
@@ -31,29 +32,29 @@
        HasShadow="True"
        VerticalOptions="Center">
 
-            <StackLayout Spacing="10">
-                <Label x:Name="ChallengeLabel"
+                <StackLayout Spacing="10">
+                    <Label x:Name="ChallengeLabel"
                 FontSize="24"
                FontAttributes="Bold"
                TextColor="#FF5722"
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"/>
 
-                <Label x:Name="ResultLabel"
+                    <Label x:Name="ResultLabel"
                FontSize="28"
                FontAttributes="Bold"
                HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"/>
 
-                <Button x:Name="CameraButton"
+                    <Button x:Name="CameraButton"
                 Text="Άνοιξε Κάμερα"
                 FontSize="20"
                 BackgroundColor="#4CAF50"
                 TextColor="White"
                 CornerRadius="15"
                 Clicked="OnCameraClicked"/>
-                <!-- Προβολή φωτογραφίας -->
-                <Image x:Name="PhotoImage"
+                    <!-- Προβολή φωτογραφίας -->
+                    <Image x:Name="PhotoImage"
                      Grid.Row="1"
                      IsVisible="False"
                      WidthRequest="300"
@@ -61,28 +62,27 @@
                      HorizontalOptions="Center"
                      VerticalOptions="End"
                      Aspect="AspectFit"/>
-            </StackLayout>
-        </Frame>
+                </StackLayout>
+            </Frame>
 
-
-
-        <!-- Κουμπί Παιχνιδιού -->
-        <Frame Grid.Row="2"
+            <!-- Κουμπί Παιχνιδιού -->
+            <Frame Grid.Row="2"
            CornerRadius="30"
            Padding="0"
            HasShadow="True"
            BackgroundColor="#4CAF50"
            HorizontalOptions="Center"
            VerticalOptions="Center">
-            
-            <Button x:Name="PlayBtn" Text="ΠΑΙΞΕ!"
+
+                <Button x:Name="PlayBtn" Text="ΠΑΙΞΕ!"
                 FontSize="28"
                 FontAttributes="Bold"
                 TextColor="White"
                 BackgroundColor="Transparent"
                 Padding="30,20"
                 Clicked="OnPlayClicked"/>
-        </Frame>
-    </Grid>
+            </Frame>
+        </Grid>
+    </ScrollView>
 
 </ContentPage>
