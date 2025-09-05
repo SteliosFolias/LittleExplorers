@@ -6,14 +6,17 @@ namespace LittleExplorers {
         private static readonly List<string> Colors = new() { "κόκκινο", "πράσινο", "μπλε", "κίτρινο", "πορτοκαλί", "μωβ", "ροζ" };
         private static readonly List<string> Shapes = new() { "κύκλο", "τετράγωνο", "ορθογώνιο", "τρίγωνο" };
 
-        private static readonly Dictionary<string, List<(SKColor lower, SKColor upper)>> ColorRanges = new() {
-            ["κόκκινο"] = new() { (new SKColor(150, 0, 0), new SKColor(255, 80, 80)) },
-            ["πράσινο"] = new() { (new SKColor(0, 150, 0), new SKColor(80, 255, 80)) },
-            ["μπλε"] = new() { (new SKColor(0, 0, 150), new SKColor(80, 80, 255)) },
-            ["κίτρινο"] = new() { (new SKColor(150, 150, 0), new SKColor(255, 255, 80)) },
-            ["πορτοκαλί"] = new() { (new SKColor(200, 80, 0), new SKColor(255, 150, 80)) },
-            ["μωβ"] = new() { (new SKColor(150, 0, 150), new SKColor(255, 80, 255)) },
-            ["ροζ"] = new() { (new SKColor(255, 150, 150), new SKColor(255, 200, 200)) },
+        private static readonly Dictionary<string, List<(Scalar lower, Scalar upper)>> HsvColorRanges = new() {
+            ["κόκκινο"] = new() {
+        (new Scalar(0, 100, 100), new Scalar(10, 255, 255)),
+        (new Scalar(160, 100, 100), new Scalar(179, 255, 255)) // κόκκινο έχει 2 ranges
+    },
+            ["πράσινο"] = new() { (new Scalar(35, 100, 100), new Scalar(85, 255, 255)) },
+            ["μπλε"] = new() { (new Scalar(100, 100, 100), new Scalar(130, 255, 255)) },
+            ["κίτρινο"] = new() { (new Scalar(20, 100, 100), new Scalar(30, 255, 255)) },
+            ["πορτοκαλί"] = new() { (new Scalar(10, 100, 100), new Scalar(20, 255, 255)) },
+            ["μωβ"] = new() { (new Scalar(130, 100, 100), new Scalar(160, 255, 255)) },
+            ["ροζ"] = new() { (new Scalar(160, 50, 150), new Scalar(170, 255, 255)) }
         };
 
         private string currentTarget = "";
@@ -105,11 +108,9 @@ namespace LittleExplorers {
 
             // 2️⃣ Δημιουργία μάσκας για το χρώμα
             Mat mask = new Mat(mat.Size(), MatType.CV_8UC1, Scalar.All(0));
-            if (!string.IsNullOrEmpty(colorName) && ColorRanges.ContainsKey(colorName)) {
-                foreach (var range in ColorRanges[colorName]) {
-                    var lower = new Scalar(range.lower.Red, range.lower.Green, range.lower.Blue);
-                    var upper = new Scalar(range.upper.Red, range.upper.Green, range.upper.Blue);
-                    Mat tempMask = new Mat();
+            if (!string.IsNullOrEmpty(colorName) && HsvColorRanges.ContainsKey(colorName)) {
+                foreach (var (lower, upper) in HsvColorRanges[colorName]) {
+                    Mat tempMask = new();
                     Cv2.InRange(hsv, lower, upper, tempMask);
                     Cv2.BitwiseOr(mask, tempMask, mask);
                 }
